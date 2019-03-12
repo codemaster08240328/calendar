@@ -15,6 +15,6 @@ $ yarn start
 Please change `your-bucket-name` with yours in package.json. Then run following command in terminal.
 
 ```
-$ yarn dev
+$ yarn deploy
 ```
 
