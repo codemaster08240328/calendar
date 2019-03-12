@@ -46,14 +46,14 @@ const localeDatePicker = {
 };
 export default class extends Component {
   state = {
-    bTitle: true,
-    bStatus: true
+    bTitle: true
   };
   handleOk = () => {
     if (!this.props.selectedData.title) {
       this.setState({ bTitle: false });
       return;
     }
+
     this.props.setModalData("ok", this.props.selectedData);
   };
   handleCancel = () => {
@@ -69,7 +69,7 @@ export default class extends Component {
   };
 
   render() {
-    const { bTitle, bStatus } = this.state;
+    const { bTitle } = this.state;
     const { modalVisible, selectedData, setModalData } = this.props;
     const visible = modalVisible ? true : false;
     if (!visible) {
@@ -84,6 +84,10 @@ export default class extends Component {
     const end =
       selectedData && selectedData.end ? moment(selectedData.end) : "";
     const onChangeTitle = event => {
+      if (event.target.value.length > 20) {
+        this.setState({ bTitle: false });
+        return;
+      }
       selectedData.title = event.target.value;
       this.setState({ bTitle: true });
       setModalData("updateValue", selectedData);
